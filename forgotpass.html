@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logged Out | GiveHub</title>
+    <title>Forgot Password | GiveHub</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: #f8f9fa;
             display: flex;
             justify-content: center;
@@ -16,26 +16,40 @@
             height: 100vh;
             transition: background 0.3s, color 0.3s;
         }
-        .logout-box {
+        .forgot-password-box {
             background: white;
             padding: 40px;
             border-radius: 12px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
             text-align: center;
-            width: 420px;
+            width: 400px;
             animation: fadeIn 0.5s ease-in-out;
         }
-        .logout-box h2 {
-            font-size: 24px;
+        .forgot-password-box h2 {
+            font-size: 26px;
             font-weight: bold;
             color: #333;
+            margin-bottom: 15px;
         }
-        .logout-box p {
+        .forgot-password-box p {
             color: #666;
-            font-size: 16px;
-            margin-top: 10px;
+            font-size: 15px;
+            margin-bottom: 20px;
         }
-        .logout-box .btn {
+        .forgot-password-box input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            margin-bottom: 15px;
+            transition: border 0.3s;
+        }
+        .forgot-password-box input:focus {
+            border-color: #ff6600;
+            outline: none;
+        }
+        .forgot-password-box .btn {
             width: 100%;
             padding: 12px;
             font-size: 16px;
@@ -57,21 +71,14 @@
         .btn-secondary:hover {
             background-color: #5a6268;
         }
-        .logout-image {
-            width: 100px;
-            margin-bottom: 15px;
-        }
-        .useful-links {
-            margin-top: 20px;
-        }
-        .useful-links a {
-            display: block;
+        .back-to-login {
+            display: inline-block;
+            margin-top: 15px;
             text-decoration: none;
             color: #007bff;
             font-size: 14px;
-            margin-top: 5px;
         }
-        .useful-links a:hover {
+        .back-to-login:hover {
             text-decoration: underline;
         }
         /* Fade-in animation */
@@ -79,12 +86,12 @@
             from { opacity: 0; transform: translateY(-10px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        /* Dark Mode Styles */
+        /* Dark Mode */
         .dark-mode {
             background-color: #222;
             color: #fff;
         }
-        .dark-mode .logout-box {
+        .dark-mode .forgot-password-box {
             background: #333;
             color: #fff;
             box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
@@ -95,7 +102,7 @@
         .dark-mode .btn-secondary {
             background-color: #888;
         }
-        .dark-mode .useful-links a {
+        .dark-mode .back-to-login {
             color: #ff8533;
         }
         .toggle-dark-mode {
@@ -111,22 +118,14 @@
 </head>
 <body>
 
-    <div class="logout-box">
-        <img src="https://your-image-host.com/image.jpg" class="logout-image" alt="Logout">
-
-        <h2>🔒 You have been logged out</h2>
-        <p>Thank you for using GiveHub! Keep making a difference by donating again soon. 💖</p>
+    <div class="forgot-password-box">
+        <h2>🔑 Forgot Password?</h2>
+        <p>Enter your email to receive a password reset link.</p>
         
-        <a href="login.html" class="btn btn-primary mt-3">🔑 Login Again</a>
-        <a href="dashboard.html" class="btn btn-secondary mt-3">🏠 Go to Home</a>
-
-        <!-- Useful Links -->
-        <div class="useful-links">
-            <h5>Need Help?</h5>
-            <a href="contact.html">📞 Contact Support</a>
-            <a href="about.html">ℹ️ About Us</a>
-            <a href="faq.html">❓ FAQs</a>
-        </div>
+        <input type="email" id="email" placeholder="Enter your email" required>
+        <button class="btn btn-primary mt-3" onclick="sendResetEmail()">📩 Send Reset Link</button>
+        
+        <a href="login.html" class="back-to-login">🔙 Back to Login</a>
 
         <!-- Dark Mode Toggle -->
         <p class="toggle-dark-mode" onclick="toggleDarkMode()">🌗 Toggle Dark Mode</p>
@@ -146,6 +145,20 @@
             } else {
                 localStorage.removeItem("darkMode");
             }
+        }
+
+        function sendResetEmail() {
+            let email = document.getElementById("email").value;
+            if (email === "") {
+                alert("Please enter your email address.");
+                return;
+            }
+            alert("A password reset link has been sent to " + email);
+
+            // Redirect to signup.html after 3 seconds
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 2000);
         }
     </script>
 
