@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logged Out | GiveHub</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            transition: background 0.3s, color 0.3s;
+        }
+        .logout-box {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+            text-align: center;
+            width: 420px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        .logout-box h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        .logout-box p {
+            color: #666;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .logout-box .btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background-color: #ff6600;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #e65c00;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        .logout-image {
+            width: 100px;
+            margin-bottom: 15px;
+        }
+        .useful-links {
+            margin-top: 20px;
+        }
+        .useful-links a {
+            display: block;
+            text-decoration: none;
+            color: #007bff;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+        .useful-links a:hover {
+            text-decoration: underline;
+        }
+        /* Fade-in animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Dark Mode Styles */
+        .dark-mode {
+            background-color: #222;
+            color: #fff;
+        }
+        .dark-mode .logout-box {
+            background: #333;
+            color: #fff;
+            box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+        }
+        .dark-mode .btn-primary {
+            background-color: #ff8533;
+        }
+        .dark-mode .btn-secondary {
+            background-color: #888;
+        }
+        .dark-mode .useful-links a {
+            color: #ff8533;
+        }
+        .toggle-dark-mode {
+            cursor: pointer;
+            font-size: 14px;
+            color: #007bff;
+            margin-top: 15px;
+        }
+        .toggle-dark-mode:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="logout-box">
+        <img src="https://source.unsplash.com/100x100/?logout,security" class="logout-image" alt="Logout">
+        <h2>🔒 You have been logged out</h2>
+        <p>Thank you for using GiveHub! Keep making a difference by donating again soon. 💖</p>
+        
+        <a href="login.html" class="btn btn-primary mt-3">🔑 Login Again</a>
+        <a href="dashboard.html" class="btn btn-secondary mt-3">🏠 Go to Home</a>
+
+        <!-- Useful Links -->
+        <div class="useful-links">
+            <h5>Need Help?</h5>
+            <a href="contact.html">📞 Contact Support</a>
+            <a href="about.html">ℹ️ About Us</a>
+            <a href="faq.html">❓ FAQs</a>
+        </div>
+
+        <!-- Dark Mode Toggle -->
+        <p class="toggle-dark-mode" onclick="toggleDarkMode()">🌗 Toggle Dark Mode</p>
+    </div>
+
+    <script>
+        // Check if dark mode was previously enabled
+        if (localStorage.getItem("darkMode") === "enabled") {
+            document.body.classList.add("dark-mode");
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+            // Save user preference in localStorage
+            if (document.body.classList.contains("dark-mode")) {
+                localStorage.setItem("darkMode", "enabled");
+            } else {
+                localStorage.removeItem("darkMode");
+            }
+        }
+    </script>
+
+</body>
+</html>
