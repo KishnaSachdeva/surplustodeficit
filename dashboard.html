@@ -10,9 +10,10 @@
             font-family: Arial, sans-serif;
         }
         .hero {
-            background-image: linear-gradient(to right, rgba(255, 140, 0, 0.8), rgba(255, 69, 0, 0.8)), url('https://source.unsplash.com/1600x900/?charity,help');
+           
             height: 80vh;
             display: flex;
+            background-image: linear-gradient(to right, rgba(255, 140, 0, 0.8), rgba(255, 69, 0, 0.8)), url('https://source.unsplash.com/1600x900/?charity,help');
             align-items: center;
             justify-content: center;
             color: white;
@@ -23,6 +24,48 @@
             height: 200px;
             object-fit: cover;
         }
+
+    h2 {
+      margin-bottom: 40px;
+    }
+
+    .tiles-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .tile {
+      flex: 0 0 calc(33.33% - 20px);
+      height: 200px;
+      background-color: #ffffff;
+      color: rgb(0, 0, 0);
+      font-size: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 16px;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .tile:hover {
+      transform: scale(1.1);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    @media (max-width: 768px) {
+      .tile {
+        flex: 0 0 calc(50% - 20px);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tile {
+        flex: 0 0 calc(100% - 20px);
+      }
+    }
     </style>
 </head>
 <body>
@@ -30,7 +73,7 @@
   <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="dashboard.html">GiveHub</a>
+        <a class="navbar-brand" href="dashboard.html">Surplust To Deficit</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -87,24 +130,15 @@
 
     <!-- Donation Categories -->
     <section class="container text-center my-5">
-        <h2 class="display-5 fw-bold">What You Can Donate</h2>
-        <div class="row mt-4">
-            <script>
-                const categories = ["Food", "Clothes", "Books", "Electronics", "Furniture", "Toys"];
-                document.write(categories.map((item) => `
-                    <div class="col-md-4 mb-4">
-                        <div class="card shadow-sm border-0" style="background-color: #fff3e0;">
-                            <img src="https://source.unsplash.com/400x300/?${item}" alt="${item}" class="card-img-top">
-                            <div class="card-body">
-                                <h4 class="card-title">${item} Donations</h4>
-                                <p class="card-text">Help by donating ${item.toLowerCase()} to those in need.</p>
-                                <button class="btn btn-primary" onclick="alert('Thank you for choosing to donate ${item}!')">Donate ${item}</button>
-                            </div>
-                        </div>
-                    </div>
-                `).join(""));
-            </script>
-        </div>
+        <h2 style="text-align: center;">What You Can Donate</h2>
+  <div class="tiles-container">
+    <div class="tile">Clothes</div>
+    <div class="tile">Books</div>
+    <div class="tile">Toys</div>
+    <div class="tile">Food</div>
+    <div class="tile">Electronics</div>
+    <div class="tile">Furniture</div>
+  </div>
     </section>
 
     <!-- How It Works -->
