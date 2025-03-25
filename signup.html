@@ -44,7 +44,8 @@
         alert('Passwords do not match');
         return;
       }
-      alert(`Account created successfully for ${name}!`);
+      alert(`Account created successfully for ${name}! Redirecting to login page...`);
+      window.location.href = 'login.html';
     });
   </script>
 </body>
