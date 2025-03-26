@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donate Items</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+        .card {
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark p-3">
+        <a class="navbar-brand" href="#">Donate Items</a>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="darkModeToggle">
+            <label class="form-check-label text-white" for="darkModeToggle">Dark Mode</label>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <h2 class="text-center">Make a Donation</h2>
+            <label for="item">Select Item:</label>
+            <select id="item" class="form-select mb-3">
+                <option value="Clothes">Clothes</option>
+                <option value="Books">Books</option>
+                <option value="Toys">Toys</option>
+                <option value="Food">Food</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Furniture">Furniture</option>
+            </select>
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" class="form-control mb-3" min="1" value="1">
+
+            <button class="btn btn-success w-100 mb-3" onclick="addDonation()">Add to Donation</button>
+
+            <h4>Your Donations:</h4>
+            <ul id="donationList" class="list-group mb-3"></ul>
+
+            <button class="btn btn-primary w-100" onclick="submitDonation()">Submit Donation</button>
+        </div>
+    </div>
+
+    <script>
+        
+        document.addEventListener("DOMContentLoaded", () => {
+            loadDonations();
+            loadDarkMode();
+        });
+
+        function addDonation() {
+            const item = document.getElementById("item").value;
+            const quantity = document.getElementById("quantity").value;
+            if (quantity <= 0) return;
+            
+            let donations = JSON.parse(localStorage.getItem("donations")) || [];
+            donations.push({ item, quantity });
+            localStorage.setItem("donations", JSON.stringify(donations));
+            loadDonations();
+        }
+
+        function loadDonations() {
+            const donationList = document.getElementById("donationList");
+            donationList.innerHTML = "";
+            let donations = JSON.parse(localStorage.getItem("donations")) || [];
+            donations.forEach((donation, index) => {
+                const li = document.createElement("li");
+                li.className = "list-group-item d-flex justify-content-between align-items-center";
+                li.innerHTML = `${donation.item} - ${donation.quantity} <button class='btn btn-danger btn-sm' onclick='removeDonation(${index})'>X</button>`;
+                donationList.appendChild(li);
+            });
+        }
+
+        function removeDonation(index) {
+            let donations = JSON.parse(localStorage.getItem("donations")) || [];
+            donations.splice(index, 1);
+            localStorage.setItem("donations", JSON.stringify(donations));
+            loadDonations();
+        }
+
+        function submitDonation() {
+    let donations = JSON.parse(localStorage.getItem("donations")) || [];
+
+    if (donations.length === 0) {
+        alert("No donations to submit.");
+        return;
+    }
+
+    localStorage.setItem("submittedDonations", JSON.stringify(donations)); 
+localStorage.removeItem("donations"); 
+ // Clear localStorage after submission
+    alert("Donation request submitted successfully!");
+    window.location.href = "loggedin.html"; // Redirect to loggedin.html
+}
+
+
+        function loadDarkMode() {
+            const toggle = document.getElementById("darkModeToggle");
+            if (localStorage.getItem("darkMode") === "enabled") {
+                document.body.classList.add("dark-mode");
+                toggle.checked = true;
+            }
+            toggle.addEventListener("change", () => {
+                if (toggle.checked) {
+                    document.body.classList.add("dark-mode");
+                    localStorage.setItem("darkMode", "enabled");
+                } else {
+                    document.body.classList.remove("dark-mode");
+                    localStorage.setItem("darkMode", "disabled");
+                }
+            });
+        }
+    </script>
+</body>
+</html>

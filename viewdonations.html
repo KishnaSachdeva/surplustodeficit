@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Donations</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .dark-mode {
+            background-color: #121212;
+            color: white;
+        }
+        .container {
+            max-width: 600px;
+            margin-top: 50px;
+        }
+        .card {
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark bg-dark p-3">
+        <a class="navbar-brand" href="viewdonations.html">View Donations</a>
+        <a class="btn btn-light" href="donate.html">Back to Donate</a>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <h2 class="text-center">Your Donations</h2>
+            <ul id="donationList" class="list-group mb-3"></ul>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            loadDonations();
+            applyDarkMode();
+        });
+
+        function loadDonations() {
+    const donationList = document.getElementById("donationList");
+    donationList.innerHTML = "";
+    let donations = JSON.parse(localStorage.getItem("submittedDonations")) || [];
+
+
+    if (donations.length === 0) {
+        donationList.innerHTML = "<li class='list-group-item'>No donations found.</li>";
+        return;
+    }
+
+    donations.forEach((donation) => {
+        const li = document.createElement("li");
+        li.className = "list-group-item";
+        li.textContent = `${donation.item} - ${donation.quantity}`;
+        donationList.appendChild(li);
+    });
+}
+
+
+        function applyDarkMode() {
+            if (localStorage.getItem("darkMode") === "enabled") {
+                document.body.classList.add("dark-mode");
+            }
+        }
+    </script>
+</body>
+</html>
